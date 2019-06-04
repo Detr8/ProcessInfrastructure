@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ProcessCommands\ToDoItemsCommands.fs" />
+    <Compile Include="Processes\NewToDoItem.fs" />
+    <Compile Include="ProcessTypes.fs" />
+    <Compile Include="ProcessFactory.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>
