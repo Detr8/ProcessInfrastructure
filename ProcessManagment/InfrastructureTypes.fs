@@ -1,4 +1,4 @@
-﻿module InfrastructureTypess
+﻿module InfrastructureTypes
 
 open System
 
