@@ -3,7 +3,7 @@
 open ProcessTypes
 
 let private processMapping=[
-    NewToDoItem.CheckAndCreateInstance;
+    ToDoItemProcess.CheckAndCreateInstance;
 ]
 
 let CreateProcess (startCmd:ProcessMessage)=
@@ -11,8 +11,8 @@ let CreateProcess (startCmd:ProcessMessage)=
         processMapping 
         |> List.map(fun f->f startCmd) 
         |> List.filter (fun res->
-        match res with
-        |Some p->true
-        |None _->false)
+            match res with
+            |Some p->true
+            |None _->false)
 
     processes

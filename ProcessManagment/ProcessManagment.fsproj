@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="InfrastructureTypes.fs" />
     <Compile Include="ProcessCommands\ToDoItemsCommands.fs" />
-    <Compile Include="Processes\NewToDoItem.fs" />
     <Compile Include="ProcessTypes.fs" />
+    <Compile Include="Processes\NewToDoItem.fs" />
     <Compile Include="ProcessFactory.fs" />
+    <Compile Include="ProcessBus.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
