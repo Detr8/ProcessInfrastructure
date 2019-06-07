@@ -5,12 +5,15 @@ open System
 
 type NewToDoItemCommand={
     Name:string;
-    Process:ProcessData;
 }
 
 type RemoveToDoItemCommand={
     ItemId:Guid;
-    Process:ProcessData;
+}
+
+type UpdateToDoItemCommand={
+    ItemId:Guid;
+    NewName:string
 }
 
 type ToDoItemCommands=

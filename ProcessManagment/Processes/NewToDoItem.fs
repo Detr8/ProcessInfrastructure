@@ -3,6 +3,7 @@
 open ProcessTypes
 open System
 open ProcessCommands
+open InfrastructureTypes
 
 
 
@@ -14,7 +15,7 @@ let private ExecuteInnerCmd (cmd:ProcessCommand)=
 
 
 
-let private ExecuteHandler msg=
+let private HandleMessage msg=
             match msg with 
             | Command cmd->()
             //| ProcessEvent ()->()
@@ -24,18 +25,24 @@ let NewProcessInstance:Process=
         Id=Guid.NewGuid();
         CreatedAt=DateTime.Now;
         //StartingCommand=NewItem;
-        WaitingActions=[];
-        Execute=ExecuteHandler;
+        NextActions=[
+            (typeof<RemoveToDoItemCommand>).FullName;
+            typeof<UpdateToDoItemCommand>.FullName
+            ]
+        //WaitingActions=[];
+        Execute=HandleMessage;
         
     }
 
 let CheckAndCreateInstance (msg:ProcessMessage):Option<Process>=
     //if true then Some(NewProcessInstance)
     //else None
+    
     match msg with
     |Command cmd->
+        
         match cmd with
-        |ToDoItemCommand tdCmd->
+        |(_,ToDoItemCommand tdCmd)->
             match tdCmd with
             |NewToDoItem _->Some(NewProcessInstance)
 
@@ -43,9 +50,8 @@ let CheckAndCreateInstance (msg:ProcessMessage):Option<Process>=
 
 let ConvertCmdToMessage (innerCmd:ToDoItemCommands):ProcessMessage=
     match innerCmd with
-    |NewToDoItem c-> ProcessMessage.Command (ProcessCommand.ToDoItemCommand (ToDoItemCommands.NewToDoItem c) )
-    //ProcessMessage.Command (ProcessCommand.ToDoItemCommand (ToDoItemCommands.NewToDoItem c) )
-
+    |NewToDoItem c-> ProcessMessage.Command ({ProcessId=None;},   ProcessCommand.ToDoItemCommand (ToDoItemCommands.NewToDoItem c) )
+    
 
 
     

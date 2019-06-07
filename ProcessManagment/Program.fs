@@ -11,7 +11,7 @@ let main argv =
     
     let newItemCmd= {
         Name="New1";
-        Process={ProcessId=None};
+        //Process={ProcessId=None};
     }
 
    

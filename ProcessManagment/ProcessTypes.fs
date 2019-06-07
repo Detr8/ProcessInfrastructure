@@ -2,6 +2,7 @@
 
 open System
 open ProcessCommands
+open InfrastructureTypes
 
 
 
@@ -11,18 +12,17 @@ type ProcessCommand=
     |ToDoItemCommand of ToDoItemCommands
 
 type ProcessMessage=
-    |Command of ProcessCommand
+    |Command of (ProcessData*ProcessCommand)
     |ProcessEvent
 
 
-
+type ActionId=string
     
 
 type Process={
     Id:Guid;
     CreatedAt:DateTime;
-    WaitingActions:ProcessMessage list;
-
+    NextActions:ActionId list;
     Execute: ProcessMessage->unit;
 }
 

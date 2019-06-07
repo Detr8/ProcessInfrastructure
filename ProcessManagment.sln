@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProcessManagment", "ProcessManagment\ProcessManagment.fsproj", "{8AE731F4-797A-4D3B-804D-0BAADF4F031C}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ProcessManagment", "ProcessManagment\ProcessManagment.fsproj", "{8AE731F4-797A-4D3B-804D-0BAADF4F031C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProcessManagment.DAL", "ProcessManagment.DAL\ProcessManagment.DAL.fsproj", "{6E2ECE8D-C629-4516-B960-E78BEDD7B28E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8AE731F4-797A-4D3B-804D-0BAADF4F031C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE731F4-797A-4D3B-804D-0BAADF4F031C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE731F4-797A-4D3B-804D-0BAADF4F031C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2ECE8D-C629-4516-B960-E78BEDD7B28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2ECE8D-C629-4516-B960-E78BEDD7B28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2ECE8D-C629-4516-B960-E78BEDD7B28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2ECE8D-C629-4516-B960-E78BEDD7B28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
