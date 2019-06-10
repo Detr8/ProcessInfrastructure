@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="QueryPatterns\ProcessQueries.fs" />
     <Compile Include="InfrastructureTypes.fs" />
     <Compile Include="ProcessCommands\ToDoItemsCommands.fs" />
     <Compile Include="ProcessTypes.fs" />
