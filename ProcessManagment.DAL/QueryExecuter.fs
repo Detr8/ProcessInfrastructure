@@ -20,3 +20,4 @@ let CreateWriter connection=
     executeWrite connection
 
 
+//flow: getFunc-> getSql(build or get from patterns)->getExecuter->execute sql-> 
