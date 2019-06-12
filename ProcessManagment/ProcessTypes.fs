@@ -1,19 +1,17 @@
 ﻿module ProcessTypes
 
 open System
-open ProcessCommands
+
 open InfrastructureTypes
+open StartCommands
 
 
 
 
 //union of commands from all processes
-type ProcessCommand=
-    |ToDoItemCommand of ToDoItemCommands
 
-type ProcessMessage=
-    |Command of (ProcessData*ProcessCommand)
-    |ProcessEvent
+
+
 
 
 type ActionId=string

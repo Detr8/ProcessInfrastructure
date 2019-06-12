@@ -1,6 +1,6 @@
 ﻿module ProcessCommands
 
-open InfrastructureTypes
+//open InfrastructureTypes
 open System
 
 type NewToDoItemCommand={

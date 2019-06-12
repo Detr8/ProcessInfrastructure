@@ -5,17 +5,18 @@ open System.Data
 open Dapper
 
 
-let executeRead<'TEntiy> (connection:IDbConnection) sql args =
+let private executeRead<'TEntiy> (connection:IDbConnection) sql args =
     connection.Query<'TEntiy>(sql,args)
 
 
-let executeWrite (connection:IDbConnection) sql args=
+let private executeWrite (connection:IDbConnection) sql args=
     connection.Execute(sql, args)
 
 
 let CreateReader<'TEntity> connection=
     executeRead connection
 
+//где создается connection ?
 let CreateWriter connection=
     executeWrite connection
 

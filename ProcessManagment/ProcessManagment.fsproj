@@ -6,15 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="QueryPatterns\ProcessQueries.fs" />
-    <Compile Include="InfrastructureTypes.fs" />
+    <Compile Include="StartCommands.fs" />
     <Compile Include="ProcessCommands\ToDoItemsCommands.fs" />
+    <Compile Include="InfrastructureTypes.fs" />
+    <Compile Include="QueryPatterns\ProcessRepository.fs" />
     <Compile Include="ProcessTypes.fs" />
     <Compile Include="Processes\NewToDoItem.fs" />
-    <Compile Include="Repositories\ProcessRepository.fs" />
     <Compile Include="ProcessFactory.fs" />
     <Compile Include="ProcessBus.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessManagment.DAL\ProcessManagment.DAL.fsproj" />
   </ItemGroup>
 
 </Project>

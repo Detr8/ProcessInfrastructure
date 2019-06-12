@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="ConnectionManager.fs" />
     <Compile Include="QueryExecuter.fs" />
     <Compile Include="SqlBuilder.fs" />
   </ItemGroup>

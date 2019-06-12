@@ -1,6 +1,7 @@
 ﻿module ProcessFactory
 
 open ProcessTypes
+open InfrastructureTypes
 
 let private processMapping=[
     ToDoItemProcess.CheckAndCreateInstance;
