@@ -2,7 +2,6 @@
 
 open System
 open ProcessCommands
-open InfrastructureTypes
 open ProcessTypes
 
 [<EntryPoint>]
@@ -11,11 +10,10 @@ let main argv =
     
     let newItemCmd= {
         Name="New1";
-        //Process={ProcessId=None};
     }
 
    
-    let msg= ToDoItemProcess.ConvertCmdToMessage (ToDoItemCommands.NewToDoItem newItemCmd)
+    let msg=ProcessMessage.Command {Data={ProcessId=None;}; Body=newItemCmd}
 
     ProcessBus.Send msg
 
