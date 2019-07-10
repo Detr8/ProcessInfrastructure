@@ -22,7 +22,7 @@ type ProcessMessage=
 
 
 type ActionId=string   
-type ProcessState={AwaitingMessages:ActionId list; ChangedDate:DateTime;}
+type ProcessState={AwaitingMessages:ActionId list; ChangedDate:DateTime;IsSuccess:bool; Error:string}
 type ProcessData={Id:Guid; State:ProcessState; CreatedDate:DateTime; }//save in the store
 
 type Process={
@@ -33,12 +33,12 @@ type Process={
     InitialState:ProcessState;
     //NextCommands:ActionId list;
     //NextEvents:ActionId list;
-    HandleMessage: ProcessMessage->ProcessData->ProcessState;
+    HandleMessage: ProcessMessage->ProcessData->(ProcessMessage->unit)->ProcessState;
 } with 
-    member this.Execute msg=
+    member this.Execute msg busSend=
         //check msg before handle
 
-        let newState=this.HandleMessage msg this.ProcessData
+        let newState=this.HandleMessage msg this.ProcessData busSend
 
         {this.ProcessData with State=newState;}
         

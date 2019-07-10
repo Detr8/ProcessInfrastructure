@@ -3,14 +3,16 @@
 open ProcessTypes
 open System
 open ProcessCommands
+open ToDoTypes
 
+//handlers
+let CreateNewItem (saver:ToDoItem->unit) (logger:string->unit) (cmd:NewToDoItemCommand) currState:ProcessState =
+    let newItem={Name=cmd.Name; Id=Guid.NewGuid();CreationDate=DateTime.Now}
+    saver newItem
+    sprintf "New item with Id=%A have been created" newItem.Id |> logger 
+    
+    {currState with AwaitingMessages=[]; ChangedDate=DateTime.Now}
 
-
-
-//let private ExecuteInnerCmd (cmd:ProcessCommand)=
-//    match cmd with 
-//    |ToDoItemCommand todoCmd->()
-//    ()
 
 let startMessage=(typeof<NewToDoItemCommand>).FullName
 let nextCommands=[
@@ -20,20 +22,26 @@ let nextCommands=[
 let nextEvents=[]
         
 
+let GetCmdHandler msg=
+    match msg with
+    |Command cmd-> match cmd.Body with
+        | :? NewToDoItemCommand as newItemCmd ->CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd//(fun () -> CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd)
+        |_ -> fun state->state
+    |_ ->fun state->state
 
-let private HandleMessage msg (processData:ProcessData)=
+let private HandleMessage msg (processData:ProcessData) busSend=
    //route command
-
-   //create a new item
-   //log it
-   //save it in to db
+   let handler=GetCmdHandler msg
+   let newState= handler processData.State
 
    //create a new state
-   {AwaitingMessages=[];ChangedDate=DateTime.Now}
+   newState
 
 
 
-let initiaState={AwaitingMessages=[]; ChangedDate=DateTime.Now}
+
+
+let initiaState={AwaitingMessages=[]; ChangedDate=DateTime.Now; IsSuccess=true;Error=""}
 
 let NewProcessInstance:Process=
     {
