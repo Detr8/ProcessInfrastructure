@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="ToDoItemsDAL.fs" />
     <Compile Include="ConnectionManager.fs" />
     <Compile Include="QueryExecuter.fs" />
     <Compile Include="SqlBuilder.fs" />
@@ -12,7 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.60.6" />
-    <PackageReference Include="Npgsql" Version="4.0.7" />
+    <PackageReference Include="Npgsql" Version="4.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.7.0" />
   </ItemGroup>
 
 </Project>

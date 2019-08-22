@@ -19,4 +19,4 @@ type UpdateToDoItemCommand={
 type ToDoItemCommands=
     |NewToDoItem of NewToDoItemCommand
     |RemoveItem of RemoveToDoItemCommand
-    |UpdateItem
+    |UpdateItem of UpdateToDoItemCommand

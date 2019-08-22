@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsUnit" Version="3.4.1" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Unquote" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ProcessTesting.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessManagment\ProcessManagment.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

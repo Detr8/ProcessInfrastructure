@@ -6,12 +6,15 @@ open ProcessCommands
 open ToDoTypes
 
 //handlers
-let CreateNewItem (saver:ToDoItem->unit) (logger:string->unit) (cmd:NewToDoItemCommand) currState:ProcessState =
+let CreateNewItemHandler (saver:ToDoItem->unit) (logger:string->unit) (cmd:NewToDoItemCommand) currState:ProcessState =
     let newItem={Name=cmd.Name; Id=Guid.NewGuid();CreationDate=DateTime.Now}
     saver newItem
     sprintf "New item with Id=%A have been created" newItem.Id |> logger 
-    
-    {currState with AwaitingMessages=[]; ChangedDate=DateTime.Now}
+    let awaitingMessages=[nameof(UpdateItem); nameof(RemoveItem)];
+    {currState with AwaitingMessages=[nameof(UpdateItem); nameof(RemoveItem)]; ChangedDate=DateTime.Now}
+
+
+//end handlers
 
 
 let startMessage=(typeof<NewToDoItemCommand>).FullName
@@ -23,9 +26,10 @@ let nextEvents=[]
         
 
 let GetCmdHandler msg=
+    
     match msg with
     |Command cmd-> match cmd.Body with
-        | :? NewToDoItemCommand as newItemCmd ->CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd//(fun () -> CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd)
+        | :? NewToDoItemCommand as newItemCmd ->CreateNewItemHandler (ToDoItemScripts.SaveToDoItem) (fun logStr->()) newItemCmd//(fun () -> CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd)
         |_ -> fun state->state
     |_ ->fun state->state
 
@@ -33,8 +37,7 @@ let private HandleMessage msg (processData:ProcessData) busSend=
    //route command
    let handler=GetCmdHandler msg
    let newState= handler processData.State
-
-   //create a new state
+   //return a new state
    newState
 
 
