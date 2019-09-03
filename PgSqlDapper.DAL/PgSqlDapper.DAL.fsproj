@@ -5,15 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="ProcessSaving.fs" />
-    <Compile Include="ToDoItemsDAL.fs" />
-    <Compile Include="ConnectionManager.fs" />
-    <Compile Include="QueryExecuter.fs" />
-    <Compile Include="SqlBuilder.fs" />
+    <Compile Include="Database.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="Dapper" Version="2.0.4" />
     <PackageReference Include="Npgsql" Version="4.0.9" />
   </ItemGroup>
 

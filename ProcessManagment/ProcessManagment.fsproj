@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="ProcessTypes.fs" />
     <Compile Include="ProcessCommands\ToDoItemsCommands.fs" />
     <Compile Include="QueryPatterns\ProcessRepository.fs" />
     <Compile Include="Processes\NewToDoItem.fs" />
@@ -16,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PgSqlDapper.DAL\PgSqlDapper.DAL.fsproj" />
+    <ProjectReference Include="..\Process.Infrastructure\Process.Infrastructure.fsproj" />
+    <ProjectReference Include="..\Process.PgSql\Process.PgSql.Data.fsproj" />
     <ProjectReference Include="..\ProcessManagment.DAL\ProcessManagment.DAL.fsproj" />
     <ProjectReference Include="..\ToDoDomain\ToDoDomain.fsproj" />
   </ItemGroup>

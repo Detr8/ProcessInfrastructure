@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Process.Infrastructure\Process.Infrastructure.fsproj" />
+    <ProjectReference Include="..\Process.PgSql\Process.PgSql.Data.fsproj" />
     <ProjectReference Include="..\ProcessManagment\ProcessManagment.fsproj" />
   </ItemGroup>
 

@@ -9,7 +9,15 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ProcessManagment.DAL", "Pro
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ToDoDomain", "ToDoDomain\ToDoDomain.fsproj", "{55FF2389-F923-4022-9E35-C20CFE39C06F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{492E7B83-2B0E-44C2-A368-13FBEB53A7BB}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Tests", "Tests\Tests.fsproj", "{492E7B83-2B0E-44C2-A368-13FBEB53A7BB}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Process.Infrastructure", "Process.Infrastructure\Process.Infrastructure.fsproj", "{857AE261-AC5D-4389-98E4-256283A22AAA}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Process.PgSql.Data", "Process.PgSql\Process.PgSql.Data.fsproj", "{CBB72E4D-5173-4B37-A7D9-040D72B78A18}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Railway.Infrastructure", "Railway.Infrastructure\Railway.Infrastructure.fsproj", "{951DB4C1-E39E-4F54-AEEF-814FE14D1925}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PgSqlDapper.DAL", "PgSqlDapper.DAL\PgSqlDapper.DAL.fsproj", "{7CF55922-5778-48ED-98B7-C304E4A7C0E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{492E7B83-2B0E-44C2-A368-13FBEB53A7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{492E7B83-2B0E-44C2-A368-13FBEB53A7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{492E7B83-2B0E-44C2-A368-13FBEB53A7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{857AE261-AC5D-4389-98E4-256283A22AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857AE261-AC5D-4389-98E4-256283A22AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857AE261-AC5D-4389-98E4-256283A22AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857AE261-AC5D-4389-98E4-256283A22AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB72E4D-5173-4B37-A7D9-040D72B78A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB72E4D-5173-4B37-A7D9-040D72B78A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB72E4D-5173-4B37-A7D9-040D72B78A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB72E4D-5173-4B37-A7D9-040D72B78A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951DB4C1-E39E-4F54-AEEF-814FE14D1925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951DB4C1-E39E-4F54-AEEF-814FE14D1925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951DB4C1-E39E-4F54-AEEF-814FE14D1925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951DB4C1-E39E-4F54-AEEF-814FE14D1925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF55922-5778-48ED-98B7-C304E4A7C0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF55922-5778-48ED-98B7-C304E4A7C0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF55922-5778-48ED-98B7-C304E4A7C0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF55922-5778-48ED-98B7-C304E4A7C0E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

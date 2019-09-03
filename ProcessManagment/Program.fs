@@ -2,7 +2,6 @@
 
 open System
 open ProcessCommands
-open ProcessTypes
 
 [<EntryPoint>]
 let main argv =
@@ -13,8 +12,8 @@ let main argv =
     }
 
    
-    let msg=ProcessMessage.Command {Data={ProcessId=None;}; Body=newItemCmd}
+    //let msg=ProcessMessage.Command {Data={ProcessId=None;}; Body=newItemCmd}
 
-    ProcessBus.Send msg
+    //ProcessBus.Send msg
 
     0 // return an integer exit code

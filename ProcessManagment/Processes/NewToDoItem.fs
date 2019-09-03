@@ -1,17 +1,20 @@
 ﻿module ToDoItemProcess
 
-open ProcessTypes
+
 open System
 open ProcessCommands
 open ToDoTypes
+open Process.Infrastructure.Types
+open ToDoDomain
 
 //handlers
-let CreateNewItemHandler (saver:ToDoItem->unit) (logger:string->unit) (cmd:NewToDoItemCommand) currState:ProcessState =
+let CreateNewItemHandler (saver:ToDoItem->Result<int, string>) (logger:string->unit) (cmd:NewToDoItemCommand) currState:ProcessState =
     let newItem={Name=cmd.Name; Id=Guid.NewGuid();CreationDate=DateTime.Now}
     saver newItem
     sprintf "New item with Id=%A have been created" newItem.Id |> logger 
-    let awaitingMessages=[nameof(UpdateItem); nameof(RemoveItem)];
-    {currState with AwaitingMessages=[nameof(UpdateItem); nameof(RemoveItem)]; ChangedDate=DateTime.Now}
+    //let awaitingMessages=[nameof(UpdateItem); nameof(RemoveItem)];
+       
+    {currState with AwaitingMessages=[typeof<UpdateToDoItemCommand>.FullName; typeof<RemoveToDoItemCommand>.FullName]; ChangedDate=DateTime.Now}
 
 
 //end handlers
@@ -29,7 +32,7 @@ let GetCmdHandler msg=
     
     match msg with
     |Command cmd-> match cmd.Body with
-        | :? NewToDoItemCommand as newItemCmd ->CreateNewItemHandler (ToDoItemScripts.SaveToDoItem) (fun logStr->()) newItemCmd//(fun () -> CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd)
+        | :? NewToDoItemCommand as newItemCmd ->CreateNewItemHandler (Scripts.SaveToDoItem ()) (fun logStr->()) newItemCmd//(fun () -> CreateNewItem (fun newItem->()) (fun logStr->()) newItemCmd)
         |_ -> fun state->state
     |_ ->fun state->state
 

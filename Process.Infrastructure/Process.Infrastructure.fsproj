@@ -6,11 +6,6 @@
 
   <ItemGroup>
     <Compile Include="Types.fs" />
-    <Compile Include="Scripts.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PgSqlDapper.DAL\PgSqlDapper.DAL.fsproj" />
   </ItemGroup>
 
 </Project>
