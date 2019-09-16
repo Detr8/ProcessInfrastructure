@@ -20,10 +20,10 @@ let ``ToDoItemProcess running test`` ()=
 
 [<Test>]
 let ``Change state after creating a new task``()=  
-    let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}    
+    let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}   
     let newProc=ToDoItemProcess.NewProcessInstance
 
-    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreatedDate=DateTime.Now}
+    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now}
 
 
     let newState= newProc.HandleMessage message processData (fun a->())
@@ -32,12 +32,12 @@ let ``Change state after creating a new task``()=
 
 [<Test>]
 let ``Test process saving``()=
-    let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}    
+    let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}
     let newProc=ToDoItemProcess.NewProcessInstance
-    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreatedDate=DateTime.Now}
+    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now}
     let newState= newProc.HandleMessage message processData (fun a->())
 
-    let connStr=""
+    let connStr="Host=localhost;Port=5432;Database=TestProcesses;User Id=postgres;Password=123456;"
     use conn=Database.GetNewConnection connStr
     let saver= Repository.SaveNewProcess (fun()->conn)
     let res= saver {processData with State=newState}

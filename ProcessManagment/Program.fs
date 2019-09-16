@@ -2,15 +2,14 @@
 
 open System
 open ProcessCommands
+open Process.Infrastructure.Types
 
 [<EntryPoint>]
 let main argv =
     printfn "Hello World from F#!"
     
-    let newItemCmd= {
-        Name="New1";
-    }
-
+    let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}
+    ProcessBus.Send message
    
     //let msg=ProcessMessage.Command {Data={ProcessId=None;}; Body=newItemCmd}
 

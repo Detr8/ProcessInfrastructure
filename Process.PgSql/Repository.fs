@@ -14,16 +14,18 @@ module Repository=
         //get sql
         let insSql=SqlScripts.InsertProcessDapper
         let conn=getConnection ()
-        let saveProcess=Database.Execute insSql conn 
-        let saveState=Database.Execute SqlScripts.InsertNewStateDapper conn
+        let saveProcess=Database.ExecuteRW insSql conn 
+        let saveState=fun procData->
+            let data={|procData.State with ProcessId=procData.Id; AwaitingMessages=procData.State.AwaitingMessages|> String.concat ";"|}
+            Database.ExecuteRW SqlScripts.InsertNewStateDapper conn data
         saveProcess >=> saveState
 
 
     let UpdateState (getConnection:unit->IDbConnection) =
         let sql=SqlScripts.InsertNewStateDapper
         
-        let fn= fun (processId:Guid) (state:ProcessState) ->
-            let mergedState={| state with ProcessId=processId|}
+        let fn= fun (processData:ProcessData)->
+            let mergedState={| processData.State with ProcessId=processData.Id;AwaitingMessages=processData.State.AwaitingMessages|> String.concat ";"|}
             Database.Execute sql (getConnection()) mergedState
         fn
 

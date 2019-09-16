@@ -11,7 +11,7 @@ module SqlScripts =
 
 
     let InsertNewStateDapper=
-        "insert into \"ProcessStates\" (\"Id\", \"ProcessesId\", \"AwaitingMessages\", \"ChangedDate\", \"IsSuccess\", \"Error\") values (@Id, @ProcessesId, @AwaitingMessages, @ChangedDate, @IsSuccess, @Error)"
+        "insert into \"ProcessStates\" (\"ProcessId\", \"AwaitingMessages\", \"ChangedDate\", \"IsSuccess\", \"Error\") values (@ProcessId, @AwaitingMessages, @ChangedDate, @IsSuccess, @Error)"
 
     let GetLastState=
         "select * from \"ProcessStates\" where \"ProcessId\"=@Id"

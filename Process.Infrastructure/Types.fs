@@ -10,8 +10,10 @@ module Types =
     type CommandData={ProcessId:ProcessId; }//по идее по этой штуке определяем какой процесс будет обрабатывать ф
     type ProcessCommand={Data:CommandData; Body:obj}//саму доменную команду кладем в body
 
+
+
     type ProcessMessage=
-        |Command of ProcessCommand
+        |Command of ProcessCommand// * ProcessId
         |ProcessEvent
     //union of commands from all processes
 
@@ -21,19 +23,20 @@ module Types =
 
     type ActionId=string   
     type ProcessState={AwaitingMessages:ActionId list; ChangedDate:DateTime;IsSuccess:bool; Error:string}
-    type ProcessData={Id:Guid; State:ProcessState; CreatedDate:DateTime; }//save in the store
+    type ProcessData={Id:Guid; State:ProcessState; CreationDate:DateTime; }//save in the store
 
     type Process={
         //Id:Guid;
         //CreatedAt:DateTime;
-        StartMessage:ActionId;
+        //StartMessage:ActionId;
         ProcessData:ProcessData;
         InitialState:ProcessState;
+        Name:string;
         //NextCommands:ActionId list;
         //NextEvents:ActionId list;
         HandleMessage: ProcessMessage->ProcessData->(ProcessMessage->unit)->ProcessState;
     } with 
-        member this.Execute msg busSend=
+        member this.Execute busSend msg =
             //check msg before handle
             try
                 let newState=this.HandleMessage msg this.ProcessData busSend

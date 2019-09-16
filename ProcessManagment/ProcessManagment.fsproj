@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Process.Infrastructure\Process.Infrastructure.fsproj" />
     <ProjectReference Include="..\Process.PgSql\Process.PgSql.Data.fsproj" />
     <ProjectReference Include="..\ProcessManagment.DAL\ProcessManagment.DAL.fsproj" />
+    <ProjectReference Include="..\Railway.Infrastructure\Railway.Infrastructure.fsproj" />
     <ProjectReference Include="..\ToDoDomain\ToDoDomain.fsproj" />
   </ItemGroup>
 
