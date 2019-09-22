@@ -17,7 +17,7 @@ module Database =
         with
         |ex->Error(ex.Message)
 
-    let ExecuteRW sqlScript (connection:IDbConnection) data=
+    let ExecuteRW<'T> sqlScript (connection:IDbConnection) (data:'T)=
         match Execute sqlScript connection data with
         |Ok r->Ok(data)
         |Error er->Error(er)

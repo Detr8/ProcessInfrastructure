@@ -7,15 +7,15 @@ module Scripts=
 
     open ToDoTypes
 
-    let private getConnection=
+    let getConnection()=
         Database.GetNewConnection("")
 
     let private saveToDoItem insertQuery updateQuery (queryExecuter:string->bool) (item:ToDoItem)=
         ()
     
-    let SaveToDoItem (getConnection:unit->IDbConnection) ()=
+    let SaveToDoItem (getConnection:unit->IDbConnection)=
         let sql=""
-        Database.Execute<ToDoItem> sql (getConnection ())
+        Database.ExecuteRW<ToDoItem> sql (getConnection ())
 
 //let SaveToDoItem (item:ToDoItem)=
 //    //get insert q
