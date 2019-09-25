@@ -34,14 +34,14 @@ module Types =
         Name:string;
         //NextCommands:ActionId list;
         //NextEvents:ActionId list;
-        HandleMessage: ProcessMessage->ProcessData->(ProcessMessage->unit)->Result<ProcessState,string>;
+        HandleMessage: ProcessMessage->ProcessData->(ProcessMessage->unit)->Result<ProcessData,string>;
     } with 
         member this.Execute busSend msg =
             //check msg before handle
             try
                 let newState=this.HandleMessage msg this.ProcessData busSend
                 match newState with
-                |Ok newState-> Ok({this.ProcessData with State=newState;})
+                |Ok newState-> Ok(newState)
                 |Error err->Error(err)
 
             with

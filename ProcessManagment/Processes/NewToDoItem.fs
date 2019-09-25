@@ -9,19 +9,23 @@ open ToDoDomain
 open Railway.Infrastructure.Operatorts
 
 
-
+let GetConnection()=
+    let connStr="Host=localhost;Port=5432;Database=TestProcesses;User Id=postgres;Password=123456;"
+    ToDoDomain.Data.GetConnection(connStr)
 
 //handlers
-let CreateNewItemHandler getConnection (logger:string->unit) (cmd:NewToDoItemCommand) currState =
-    let newItem={Name=cmd.Name; Id=Guid.NewGuid();CreationDate=DateTime.Now}
+let CreateNewItemHandler getConnection (logger:string->unit) (cmd:NewToDoItemCommand) (currProcess:ProcessData) =
+    let newItem={Name=cmd.Name; Id=0;CreationDate=DateTime.Now;ProcessId=currProcess.Id}
     sprintf "New item with Id=%A have been created" newItem.Id |> logger 
 
-    let successRes={currState with AwaitingMessages=[typeof<UpdateToDoItemCommand>.FullName; typeof<RemoveToDoItemCommand>.FullName]; ChangedDate=DateTime.Now}
-    let save (state:ProcessState)=
-        let newItem={Name=cmd.Name; Id=Guid.NewGuid();CreationDate=DateTime.Now}
-        ToDoDomain.Scripts.SaveToDoItem getConnection newItem
 
-    let retSucces (item:ToDoItem)=Ok(successRes)
+    let newState={currProcess.State with AwaitingMessages=[typeof<UpdateToDoItemCommand>.FullName; typeof<RemoveToDoItemCommand>.FullName]; ChangedDate=DateTime.Now}
+    let save (state:ProcessData)=
+        //let newItem={Name=cmd.Name; Id=0;CreationDate=DateTime.Now}
+        let res= ToDoDomain.Scripts.SaveNewToDoItem getConnection newItem
+        res
+
+    let retSucces (item:ToDoItem)=Ok({currProcess with State=newState})
 
     save >=> retSucces
 
@@ -29,14 +33,14 @@ let GetCmdHandler msg (processData:ProcessData)=
     
     match msg with
     |Command cmd-> match cmd.Body with
-        | :? NewToDoItemCommand as newItemCmd ->CreateNewItemHandler ToDoDomain.Scripts.getConnection (fun logStr->()) newItemCmd processData.State //should use chain of func cmd >=> next cmd
+        | :? NewToDoItemCommand as newItemCmd ->CreateNewItemHandler GetConnection (fun logStr->()) newItemCmd processData //should use chain of func cmd >=> next cmd
         |_ -> fun state->Ok(state)
     |_ ->fun state->Ok(state)
 
 let private HandleMessage msg (processData:ProcessData) busSend=
    //route command
    let handler=GetCmdHandler msg processData
-   let newState= handler processData.State
+   let newState= handler processData
    //return a new state
    newState
 

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="PgSqlData.fs" />
+    <Compile Include="Data.fs" />
     <Compile Include="Types.fs" />
     <Compile Include="Scripts.fs" />
   </ItemGroup>
