@@ -6,8 +6,8 @@ open PgSqlDapper.DAL
 open Process.PgSql
 open System
 open Railway.Infrastructure.Operatorts
+open ProcessManagment
 
-let processMap=["ToDoItemProcess", NewProcessStartWithState;] |> Map.ofList
 
 
 
@@ -30,25 +30,33 @@ let execFunc p busSend connection=
 
     saveProcess >=> execNext >=> saveProcess2   
 
-
+//need testing
 let fakePost msg=
     let (msg, busSend)=msg
     
     match msg with 
-    |Command cmd-> 
-        (ProcessFactory.CreateProcess msg) //check processId before
-        |> List.filter(fun p->p.IsSome) 
-        |> List.map(fun p->p.Value)
-        |> List.map(fun p->
-            let connStr="Host=localhost;Port=5432;Database=TestProcesses;User Id=postgres;Password=123456;"
-            use connection=Database.GetNewConnection connStr
-            let saver=execFunc p busSend connection
-            saver cmd |> ignore            
-        )
-           
+    |Command cmd->
+        match cmd.Data.ProcessId with
+        |Some processId-> //existing process case
+            let exisitingProcess= ProcessFactory.RestoreProcess cmd.Data.ProcessId.Value
+            match exisitingProcess with
+            |Some proc->
+                use connection=Database.GetNewConnection Config.ConnectionString
+                let saver=execFunc proc busSend connection
+                saver cmd |> ignore   
+            |None _->()
+        |None _->
+            (ProcessFactory.CreateProcess msg) //check processId before
+            |> List.filter(fun p->p.IsSome) 
+            |> List.map(fun p->p.Value)
+            |> List.map(fun p->
+                let connStr=Config.ConnectionString
+                use connection=Database.GetNewConnection connStr
+                let saver=execFunc p busSend connection
+                saver cmd |> ignore            
+            )|>ignore 
     
-         |>ignore //here state can be saved
-    
+         
     |_ ->()
     
 

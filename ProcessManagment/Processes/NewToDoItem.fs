@@ -53,10 +53,10 @@ let initiaState={AwaitingMessages=[]; ChangedDate=DateTime.Now; IsSuccess=true;E
 let NewProcessInstance:Process=
     {
         //StartMessage=startMessage;
-        ProcessData={Id=Guid.NewGuid(); State=initiaState; CreationDate=DateTime.Now};
+        ProcessData={Id=Guid.NewGuid(); State=initiaState; CreationDate=DateTime.Now; Name="ToDoItemProcess"};
         InitialState=initiaState;
         HandleMessage= fun msg procData-> HandleMessage msg procData;
-        Name="ToDoItemProcess"
+        
     }
 
 let NewProcessStartWithState processData=
@@ -65,7 +65,7 @@ let NewProcessStartWithState processData=
         ProcessData=processData;
         InitialState=initiaState;
         HandleMessage= fun msg procData-> HandleMessage msg procData;
-        Name="ToDoItemProcess"
+        
     }
 
 //Check start conditions

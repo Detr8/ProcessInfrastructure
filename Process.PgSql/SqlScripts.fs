@@ -16,6 +16,19 @@ module SqlScripts =
     let GetLastState=
         "select * from \"ProcessStates\" where \"ProcessId\"=@Id"
 
+    let GetProcessWithStateById=
+        """select 
+        "ProcessId", 
+        "AwaitingMessages",
+        "ChangedDate",
+        "IsSuccess",
+        "Error",
+        "CreationDate"
+        from "ProcessStates" 
+        join "Processes" on "Processes"."Id"="ProcessStates"."ProcessId"
+        where "ProcessId"=@Id 
+        order by "ChangedDate" desc limit 1"""
+
 module SqlConnection=
     open Npgsql
     open System.Data

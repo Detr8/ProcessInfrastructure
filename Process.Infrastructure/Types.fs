@@ -23,7 +23,7 @@ module Types =
 
     type ActionId=string   
     type ProcessState={AwaitingMessages:ActionId list; ChangedDate:DateTime;IsSuccess:bool; Error:string}
-    type ProcessData={Id:Guid; State:ProcessState; CreationDate:DateTime; }//save in the store
+    type ProcessData={Id:Guid; State:ProcessState; CreationDate:DateTime; Name:string;}//save in the store
 
     type Process={
         //Id:Guid;
@@ -31,7 +31,7 @@ module Types =
         //StartMessage:ActionId;
         ProcessData:ProcessData;
         InitialState:ProcessState;
-        Name:string;
+        
         //NextCommands:ActionId list;
         //NextEvents:ActionId list;
         HandleMessage: ProcessMessage->ProcessData->(ProcessMessage->unit)->Result<ProcessData,string>;

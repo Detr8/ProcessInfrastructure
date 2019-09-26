@@ -35,7 +35,7 @@ let ``ToDoItemProcess running test`` ()=
 let ``Test process saving``()=
     let message = Command {Data={ProcessId=None}; Body={Name="A new task1"}}
     let newProc=ToDoItemProcess.NewProcessInstance
-    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now}
+    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now; Name=newProc.ProcessData.Name}
     let newState= newProc.HandleMessage message processData (fun a->())
 
     let testSaving newState=
@@ -58,7 +58,7 @@ let ``Change state after creating a new task``()=
     
 
 
-    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now}
+    let processData={Id=Guid.NewGuid(); State=newProc.InitialState; CreationDate=DateTime.Now; Name=newProc.ProcessData.Name}
     saveProcess processData connStr
 
     let res= newProc.HandleMessage message processData (fun a->())
